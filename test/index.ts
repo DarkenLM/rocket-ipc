@@ -1,17 +1,23 @@
 "use strict";
+import helpers_config from "./helpers/config"
+import schemas_errors_errors from "./schemas/errors/errors"
 
-import { expect } from "chai";
-import { Example } from "../dist/index";
+const helpers = {
+	config: helpers_config
+}
 
-describe("Example class", () => {
-	it("should create an instance using its constructor", () => {
-		const example: Example = new Example();
-		expect(example, "example should exist").to.exist; // tslint:disable-line:no-unused-expression
-	});
-	it("should return whatever is passed to exampleMethod()", () => {
-		const example: Example = new Example();
-		const param = "This is my param.";
-		const returnValue: string = example.exampleMethod(param);
-		expect(returnValue).to.equal(param, "returns the value passed as a parameter");
-	});
-});
+const schemas = {
+	errors: {
+		errors: schemas_errors_errors
+	}
+}
+
+describe("HELPERS", async function() {
+	describe("CONFIG", helpers.config)
+})
+
+describe("SCHEMAS", async function() {
+	describe("ERRORS", async function() {
+		describe("ERRORS", schemas.errors.errors)
+	})
+})

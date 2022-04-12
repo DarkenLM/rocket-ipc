@@ -6,5 +6,6 @@ module.exports = {
   slow: 1000,
   recursive: true,
   extension: ['ts'],
-  require: ["ts-node/register", "source-map-support/register"]
+  require: ["ts-node/register", "source-map-support/register"],
+  reporter: 'spec'
 }
