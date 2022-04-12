@@ -1,6 +1,6 @@
 {
   "all": false,
-  "branches": 90,
+  "branches": 80,
   "extension": [
     ".js",
     ".ts",
