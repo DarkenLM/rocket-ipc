@@ -7,8 +7,7 @@
  * @summary Error Factory for Rocket IPC
  * @author Rafael Fernandes <rafaelfernandes660@gmail.com>
  *
- * Created at     : 2022-03-27 11:30:38
- * Last modified  : 2022-04-12 14:32:30
+ * @module
  */
 
 import { format } from "util" 
@@ -20,8 +19,8 @@ const rawMessage = Symbol("raw_message");
 /**
  * Custom Error for any error on the Rocket IPC package
  * 
- * `BaseError[@eCode]` returns the error code for the error thrown
- * `BaseError[@rawMessage]` returns the raw message from the message codes, without any formatting applied
+ * `BaseError[@eCode]` returns the error code for the error thrown  
+ * `BaseError[@rawMessage]` returns the raw message from the message codes, without any formatting applied  
  *
  * @export
  * @class BaseError
@@ -49,14 +48,14 @@ export class BaseError extends Error {
 	 * @memberof Errors
 	 * @returns {Error}
 	 */
-	public parseError(key: string, ...args: (string | number | boolean)[]): Error {
+	public parseError(key: string, args: (string | number | boolean)[]): Error {
 		const errorLocale = this.messages?.messages?.errors
 		if (typeof errorLocale == "object" && key in errorLocale) {
 			return new Error(format(String(errorLocale[key]), ...(args || [])))
 		} else return new Error(key)
 	}
 
-	public getRawMessage(key: string): string {
+	protected getRawMessage(key: string): string {
 		const errorLocale = this.messages?.messages?.errors
 		if (typeof errorLocale == "object" && key in errorLocale) {
 			return String(errorLocale[key])
@@ -65,17 +64,17 @@ export class BaseError extends Error {
 }
 
 /**
- * Custom Error used on the Configuration, that parses error messages and returns them.
+ * Custom Error used on the Configuration, that parses error messages and returns them.  
  *
  * @class ConfigurationError
  * @extends {BaseError}
  */
-class ConfigurationError extends BaseError {
-	constructor(Messages: Locale, message: string) {
+export class ConfigurationError extends BaseError {
+	constructor(Messages: Locale, message: string, args: (string | number | boolean)[] = []) {
 		super(Messages, message)
 		Object.setPrototypeOf(this, ConfigurationError.prototype);
 		this.name = "ConfigurationError"
-		this.message = this.parseError(message).message
+		this.message = this.parseError(message, args).message
 		
 
 		if (Error.captureStackTrace) Error.captureStackTrace(this, ConfigurationError);
@@ -83,17 +82,17 @@ class ConfigurationError extends BaseError {
 }
 
 export type ErrorTypes = {
-	ConfigurationError: new (message: string) => ConfigurationError
+	ConfigurationError: new (message: string, args?: (string | number | boolean)[]) => ConfigurationError
 }
 
 
 /**
- * Factory Class for Rocket IPC's Custom Errors
- * Holds the message codes and the created errors
+ * Factory Class for Custom Errors  
+ * Holds the message codes and the created errors  
  *
  * @class Errors
  */
-class Errors {
+export class ErrorFactory {
 	messages: Locale;
 	errors: ErrorTypes
 	constructor(messageCodes?: Locale) {
@@ -121,6 +120,41 @@ class Errors {
 	}
 }
 
-export {
-	Errors
+export const Errors = new ErrorFactory().errors
+
+
+// Try Catch Error Parser
+
+type MessagedError = {
+	message: string
+}
+
+function isMessagedError(error: unknown): error is MessagedError {
+	return (
+		typeof error === "object" &&
+		error !== null &&
+		"message" in error &&
+		typeof (error as Record < string, unknown > ).message === "string"
+	)
+}
+
+function toMessagedError(maybeError: unknown): MessagedError {
+	if (isMessagedError(maybeError)) return maybeError
+
+	try {
+		return new Error(JSON.stringify(maybeError))
+	} catch {
+		return new Error(String(maybeError))
+	}
+}
+
+/**
+ * Extracts the message out of a thrown Error
+ *
+ * @export
+ * @param {unknown} error
+ * @return {string} The extracted message from the Error
+ */
+export function getErrorMessage(error: unknown): string {
+	return toMessagedError(error).message
 }

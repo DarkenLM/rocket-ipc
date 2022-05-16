@@ -2,91 +2,108 @@
 	"messages": {
 		"errors": {
 			"invalid": {
-				"socket": {
-					"id": {
-						"type": "Invalid socket id type. (should be 'string')"
+				"config": {
+					"socket": {
+						"id": {
+							"type": "Invalid socket id type. (should be 'string')"
+						},
+						"root": {
+							"type": "Invalid socket root type. (should be 'string')"
+						},
+						"raw": {
+							"type": "Invalid socket isRaw type. (should be 'boolean')"
+						},
+						"encoding": {
+							"type": "Invalid socket encoding type. (should be one of 'ascii', 'utf8', 'utf16le', 'ucs2', 'base64', 'hex')"
+						},
+						"delimiter": {
+							"type": "Invalid socket delimiter type. (should be 'string')"
+						},
+						"allowAsync": {
+							"type": "Invalid socket allowAsync type. (should be 'boolean')"
+						},
+						"unlink": {
+							"type": "Invalid socket shouldUnlink type. (should be 'boolean')"
+						},
+						"retryTime": {
+							"type": "Invalid socket retryTime type. (should be 'number')"
+						},
+						"maxRetries": {
+							"type": "Invalid socket maxRetries type. (should be 'number')"
+						},
+						"maxConnections": {
+							"type": "Invalid socket maxConnections type. (should be 'number')"
+						},
+						"readableAll": {
+							"type": "Invalid socket readableAll type. (should be 'boolean')"
+						},
+						"writeableAll": {
+							"type": "Invalid socket writeableAll type. (should be 'boolean')"
+						}
 					},
-					"root": {
-						"type": "Invalid socket root type. (should be 'string')"
+					"network": {
+						"IPType": {
+							"type": "Invalid network IP type. (should be one of 'IPv4', 'IPv6')",
+							"set": "Could not set IP type: System managed variable"
+						},
+						"tls": {
+							"type": "Invalid network shouldUseTLS type. (should be 'boolean')",
+							"set": "Could not set shouldUseTLS: System managed variable"
+						},
+						"host": {
+							"type": "Invalid network host type. (should be 'string')"
+						},
+						"port": {
+							"type": "Invalid network port type. (should be 'number')"
+						}
 					},
-					"raw": {
-						"type": "Invalid socket isRaw type. (should be 'boolean')"
-					},
-					"encoding": {
-						"type": "Invalid socket encoding type. (should be one of 'ascii', 'utf8', 'utf16le', 'ucs2', 'base64', 'hex')"
-					},
-					"delimiter": {
-						"type": "Invalid socket delimiter type. (should be 'string')"
-					},
-					"allowAsync": {
-						"type": "Invalid socket allowAsync type. (should be 'boolean')"
-					},
-					"unlink": {
-						"type": "Invalid socket shouldUnlink type. (should be 'boolean')"
-					},
-					"retryTime": {
-						"type": "Invalid socket retryTime type. (should be 'number')"
-					},
-					"maxRetries": {
-						"type": "Invalid socket maxRetries type. (should be 'number')"
-					},
-					"maxConnections": {
-						"type": "Invalid socket maxConnections type. (should be 'number')"
-					},
-					"readableAll": {
-						"type": "Invalid socket readableAll type. (should be 'boolean')"
-					},
-					"writeableAll": {
-						"type": "Invalid socket writeableAll type. (should be 'boolean')"
-					}
-				},
-				"network": {
-					"IPType": {
-						"type": "Invalid network IP type. (should be one of 'IPv4', 'IPv6')",
-						"set": "Could not set IP type: System managed variable"
-					},
-					"tls": {
-						"type": "Invalid network shouldUseTLS type. (should be 'boolean')",
-						"set": "Could not set shouldUseTLS: System managed variable"
-					},
-					"host": {
-						"type": "Invalid network host type. (should be 'string')"
-					},
-					"port": {
-						"type": "Invalid network port type. (should be 'number')"
-					}
-				},
-				"tcpInterface": {
-					"localAddress": {
-						"type": "Invalid TCP Interface Local Address type. (should be 'string' or 'null')"
-					},
-					"localPort": {
-						"type": "Invalid TCP Interface Local Port type. (should be 'number' or 'null')"
-					},
-					"host": {
-						"type": "Invalid TCP Interface Family type. (should be 'number')"
-					},
-					"hints": {
-						"type": "Invalid TCP Interface DNS Hints type. (should be one of '0', '4', '6')"
-					},
-					"lookup": {
-						"type": "Invalid TCP Interface DNS Lookup type. (should be 'null' or 'function')"
-					}
-				},
-				"logger": {
-					"enabled": {
-						"type": "Invalid IsLoggerEnabled type. (should be 'boolean')"
-					},
-					"colors": {
-						"type": "Invalid IsLoggerEnabled type. (should be 'boolean')"
-					},
-					"depth": {
-						"type": "Invalid IsLoggerEnabled type. (should be 'number')"
+					"tcpInterface": {
+						"localAddress": {
+							"type": "Invalid TCP Interface Local Address type. (should be 'string' or 'null')"
+						},
+						"localPort": {
+							"type": "Invalid TCP Interface Local Port type. (should be 'number' or 'null')"
+						},
+						"host": {
+							"type": "Invalid TCP Interface Family type. (should be 'number')"
+						},
+						"hints": {
+							"type": "Invalid TCP Interface DNS Hints type. (should be one of '0', '4', '6')"
+						},
+						"lookup": {
+							"type": "Invalid TCP Interface DNS Lookup type. (should be 'null' or 'function')"
+						}
 					},
 					"logger": {
-						"type": "Invalid IsLoggerEnabled type. (should be 'null' or 'function')"
+						"enabled": {
+							"type": "Invalid IsLoggerEnabled type. (should be 'boolean')"
+						},
+						"colors": {
+							"type": "Invalid IsLoggerEnabled type. (should be 'boolean')"
+						},
+						"depth": {
+							"type": "Invalid IsLoggerEnabled type. (should be 'number')"
+						},
+						"logger": {
+							"type": "Invalid IsLoggerEnabled type. (should be 'null' or 'function')"
+						}
+					},
+					"initializing.argument": {
+						"type": "Invalid Initializing Argument type. (should be 'Configuration' or 'Object')",
+						"field": "Invalid Field Type for '%s' (should be '%s')"
 					}
 				}
+			},
+			"forbidden": {
+				"property": {
+					"system": "Forbidden access: System managed property."
+				}
+			},
+			"unknown": {
+				"property": "Unknown property on target '%s': %s"
+			},
+			"undefined": {
+				"property": "Property is not defined on target '%s': %s"
 			}
 		}
 	}

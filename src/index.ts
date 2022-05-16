@@ -6,10 +6,10 @@
  *
  * @summary Entry file for Rocket IPC
  * @author Rafael Fernandes <rafaelfernandes660@gmail.com>
- *
- * Created at     : 2022-03-23 08:08:29 
- * Last modified  : 2022-04-12 11:05:50
+ * 
  */
 
 
 "use strict";
+
+export * as IPC from "./ipc/IPC"

@@ -6,17 +6,22 @@
  * @summary Message Code interface for Rocket IPC
  * @author Rafael Fernandes <rafaelfernandes660@gmail.com>
  *
- * Created at     : 2022-03-29 21:39:52
- * Last modified  : 2022-04-12 14:32:10
+ * @module
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { readFileSync } from "fs";
 import { join } from "path";
 import { z } from "zod";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericObject = { [key: string]: any };
-type messageField = { [key: string]: string | messageField }
+
+/**
+ * Message Code Field structure
+ * @property
+ */
+export type messageField = { [key: string]: string | messageField }
 const ZodLocale: z.ZodSchema<messageField> = z.lazy(() =>
 	z.record(z.union([z.string(), ZodLocale]))
 );
@@ -25,6 +30,10 @@ export const ZodLocaleSchema = z.object({
 	messages: ZodLocale,
 });
 
+/**
+ * Message Codes File structure
+ * @property
+ */
 export type Locale = z.infer<typeof ZodLocaleSchema>
 
 /**
@@ -114,6 +123,7 @@ export function getFlattenMessageCodes(): Locale {
 	};
 
 	const obj = getMessageCodes()
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const is_messageField = (x: any): x is messageField => ZodLocale.safeParse(x).success
 	
 	if (typeof(obj.messages) == "object") {
