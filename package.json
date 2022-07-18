@@ -51,7 +51,7 @@
     "@typescript-eslint/eslint-plugin": "^5.24.0",
     "@typescript-eslint/parser": "^5.24.0",
     "chai": "^4.1.2",
-    "commitizen": "^4.2.4",
+    "commitizen": "^4.2.5",
     "conventional-changelog-cli": "^2.2.2",
     "coveralls": "^3.0.3",
     "cz-conventional-changelog": "^3.3.0",
